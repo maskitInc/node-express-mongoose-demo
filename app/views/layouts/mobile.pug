@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+  include ../includes/head
+  meta(name='viewport', content='width=device-width,initial-scale=1')
+  link(rel="stylesheet", href="/css/bootstrap-responsive.min.css")
+  body
+
+    .alert
+      |  You are checking this out from your mobile device!
+
+    .container
+      .content
+        block content
+
+    .messages
+        include ../includes/messages
+
+    include ../includes/footer
+    include ../includes/foot

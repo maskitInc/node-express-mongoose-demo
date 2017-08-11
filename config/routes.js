@@ -10,6 +10,9 @@ const comments = require('../app/controllers/comments');
 const tags = require('../app/controllers/tags');
 const auth = require('./middlewares/authorization');
 
+const landing = require('../app/controllers/landing');
+const main = require('../app/controllers/main');
+
 /**
  * Route middlewares
  */
@@ -80,7 +83,12 @@ module.exports = function (app, passport) {
   app.delete('/articles/:id', articleAuth, articles.destroy);
 
   // home route
-  app.get('/', articles.index);
+  //app.get('/', articles.index);
+
+  app.get('/landing-01', landing.var01);
+  app.get('/landing-02', landing.var02);
+
+  app.get('/main-01', main.var01);
 
   // comment routes
   app.param('commentId', comments.load);

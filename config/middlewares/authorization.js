@@ -25,6 +25,21 @@ exports.user = {
 };
 
 /*
+ *  Table authorization routing middleware
+ */
+
+exports.accountRow = {
+  hasAuthorization: function (req, res, next) {
+    if (req.user.username === 'Admin') {
+      next();
+    } else {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/');
+    }
+  }
+};
+
+/*
  *  Article authorization routing middleware
  */
 
@@ -33,6 +48,19 @@ exports.article = {
     if (req.article.user.id != req.user.id) {
       req.flash('info', 'You are not authorized');
       return res.redirect('/articles/' + req.article.id);
+    }
+    next();
+  }
+};
+/*
+ *  Article authorization routing middleware
+ */
+
+exports.blogArticle = {
+  hasAuthorization: function (req, res, next) {
+    if (req.blogArticle.user.id != req.user.id) {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/resources/blog/' + req.blogArticle.id);
     }
     next();
   }

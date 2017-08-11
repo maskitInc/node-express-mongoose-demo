@@ -1,0 +1,40 @@
+extends ../layouts/default
+
+block head
+
+block content
+
+    include main-navigation
+
+    main
+        include content/main-w-video
+        //include content/about-company.pug
+        //include content/principles-of-work-columns
+        include content/principles-of-work-row
+
+
+block footer
+    script(src='/scripts/main-var-01.js')
+    script(src="/vendor-js/video.js/dist/video.min.js")
+    script(src="/vendor-js/videojs-youtube/dist/Youtube.min.js")
+    //script(src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.19.0/video.min.js")
+    //script(src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/2.3.2/Youtube.min.js")
+
+    script.
+        var myPlayer = videojs('bg-block-01', {
+            controls: false,
+            //loop: true,
+            autoplay: true,
+            preload: true,
+            poster: '/images/video-block-01-bg.jpeg',
+            sources: [
+                {
+                    type: 'video/mp4',
+                    src: '/video/main-block-01.mp4'
+                },
+                {
+                    type: 'video/webm',
+                    src: '/video/main-block-01.webm'
+                }
+            ]
+        });

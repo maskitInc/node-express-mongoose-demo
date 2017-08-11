@@ -1,0 +1,24 @@
+extends ../layouts/default
+
+block head
+
+block content
+    include var-01
+
+    //include block-01
+
+block footer
+    script.
+        $(".registration-btn").on('click', function (event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+
+                var hash = this.hash;
+
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function () {
+                    window.location.hash = hash;
+                });
+            }
+        });

@@ -1,0 +1,177 @@
+.main-w-video {
+    position: relative;
+    overflow: hidden;
+    &-container {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        max-width: 1160px;
+        padding-right: 40px;
+        padding-left: 40px;
+        padding-top: 192px;
+        padding-bottom: 120px;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 60px;
+        margin: 0;
+        padding-bottom: 18px;
+        line-height: 1;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #002636;
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+    }
+    h4 {
+        display: inline-block;
+        font-size: 24px;
+        margin: 0;
+        //padding-bottom: 36px;
+        line-height: 1.2;
+        //border-bottom: 1px solid rgba(0, 39, 56, .2);
+        margin-bottom: 18px;
+        color: rgba(0, 39, 56, 0.75);
+        //color: rgba(255, 255, 255, .75);
+        font-family: 'Open Sans', sans-serif;
+    }
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: rgba(0, 39, 56, .75);
+        color: rgba(255, 255, 255, .75);
+        margin-bottom: 30px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .title-block {
+        width: 65%;
+        margin: auto;
+        text-align: center;
+        h4 {
+            background: #87c9eb;
+            background: #021017;
+            color: #ffffff;
+            font-style: italic;
+            padding: 8px 18px;
+
+        }
+        .btn-set {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+
+            .btn {
+                //float: left;
+                background-color: #87C9EB;
+                text-align: center;
+                line-height: 1;
+                color: #fff;
+                box-sizing: border-box;
+                cursor: pointer;
+                transition: box-shadow .4s;
+                border: none;
+
+                height: 48px;
+                width: 100%;
+                max-width: 196px;
+
+                margin: 12px auto 18px auto;
+
+                //box-shadow: 0 25px 45px -20px #5e92aa;
+                box-shadow: 0 25px 45px -20px #0b1013;
+                font-size: 16px;
+                border-radius: 48px;
+                font-weight: 500;
+
+                @media (min-width: 540px) {
+                    height: 54px;
+                    font-size: 16px;
+                    width: 240px;
+                    margin: 18px auto 24px auto;
+                }
+
+                @media (min-width: 768px) {
+                    max-width: none;
+                    height: 60px;
+                    font-size: 18px;
+                    width: 252px;
+                    margin: 24px auto 30px auto;
+                }
+                @media (min-width: 992px) {
+                    height: 66px;
+                    font-size: 20px;
+                    font-weight: normal;
+                    padding-top: 8px;
+                    width: 280px;
+                    margin: 24px auto 36px auto;
+                }
+                @media (min-width: 1200px) {
+                    height: 72px;
+                    font-size: 23px;
+                    margin: 12px auto 48px auto;
+                    width: 240px;
+                    margin-right: 24px;
+                }
+
+                @media (min-width: 1600px) {
+
+                    height: 96px;
+                    width: 384px;
+
+                    margin: 48px auto 60px auto;
+                    padding-top: 8px;
+                    font-size: 28px;
+                }
+
+                &:hover,
+                &:focus {
+                    background-color: #87C9EB;
+                    color: #fff;
+                    //box-shadow: 0 9px 30px -8px #5e92aa;
+                    box-shadow: 0 9px 30px -8px #0f1e25;
+                    transition: all .2s;
+                }
+                &:active {
+                    background-color: #87C9EB;
+                    color: #fff;
+                    //box-shadow: 0 6px 50px -20px #546782;
+                    //box-shadow: 0 3px 20px -4px #7895c1;
+                    box-shadow: 0 3px 9px -5px #5e92aa;
+                    transition: all .2s;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        &:before {
+            background: rgba(0, 18, 26, 0.8);
+            z-index: 1;
+        }
+        &:after{
+            background: url(/images/noise-pattern-02.png);
+        }
+    }
+
+}

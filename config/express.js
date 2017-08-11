@@ -14,7 +14,6 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
 const cors = require('cors');
-const upload = require('multer')();
 
 const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
@@ -37,7 +36,7 @@ module.exports = function (app, passport) {
   }));
 
   app.use(cors({
-    origin: ['http://localhost:3000', 'https://reboil-demo.herokuapp.com'],
+    origin: ['http://localhost:3000', 'https://velarm-landing-01.herokuapp.com'],
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     credentials: true
   }));
@@ -51,8 +50,8 @@ module.exports = function (app, passport) {
     log = {
       stream: {
         write: message => winston.info(message)
-      }
-    };
+    }
+  };
   }
 
   // Don't log during tests
@@ -61,7 +60,7 @@ module.exports = function (app, passport) {
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'pug');
 
   // expose package.json to views
   app.use(function (req, res, next) {
@@ -72,8 +71,8 @@ module.exports = function (app, passport) {
 
   // bodyParser should be above methodOverride
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(upload.single('image'));
+  app.use(bodyParser.urlencoded({extended: true}));
+  //app.use(upload.single('image'));
   app.use(methodOverride(function (req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -85,18 +84,42 @@ module.exports = function (app, passport) {
 
   // CookieParser should be above session
   app.use(cookieParser());
-  app.use(cookieSession({ secret: 'secret' }));
+  app.use(cookieSession({secret: 'secret'}));
   app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: pkg.name,
     store: new mongoStore({
       url: config.db,
-      collection : 'sessions'
+      collection: 'sessions'
     })
   }));
 
-  // use passport session
+
+  /**
+   *
+   */
+
+  app.use('/sw-toolbox', express.static( config.root + '/node_modules/sw-toolbox'));
+  app.use('/jquery', express.static( config.root + '/node_modules/jquery'));
+  app.use('/bootstrap', express.static( config.root + '/node_modules/bootstrap'));
+  app.use('/font-awesome', express.static( config.root + '/node_modules/font-awesome'));
+  //app.use('/vjs-youtube', express.static( config.root + '/node_modules/videojs-youtube/dist'));
+  app.use('/vendor-js', express.static( config.root + '/node_modules'));
+
+  app.use('/scripts', express.static( config.root + '/public/js/'));
+  app.use('/images', express.static( config.root + '/public/img'));
+  app.use('/files', express.static( config.root + '/public/files'));
+  app.use('/video', express.static( config.root + '/public/video'));
+  app.use('/audio', express.static( config.root + '/public/audio'));
+  app.use('/css', express.static( config.root + '/public/css'));
+  app.use('/', express.static( config.root ));
+
+  /**
+   *
+   */
+
+    // use passport session
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -106,13 +129,23 @@ module.exports = function (app, passport) {
   // should be declared after session and flash
   app.use(helpers(pkg.name));
 
+
   if (env !== 'test') {
     app.use(csrf());
 
     // This could be moved to view-helpers :-)
     app.use(function (req, res, next) {
-      res.locals.csrf_token = req.csrfToken();
+
+      res.locals.csrfToken = req.csrfToken();
       next();
+
+      /*
+       var token = req.csrfToken();
+       res.cookie('XSRF-TOKEN', token);
+       res.locals.csrfToken = token;
+       next();
+       */
+
     });
   }
 

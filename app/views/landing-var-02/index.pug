@@ -1,0 +1,45 @@
+extends ../layouts/default
+
+block head
+
+block content
+
+    include var-02
+
+    //include block-01
+
+block footer
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.19.0/video.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/2.3.2/Youtube.min.js")
+    script.
+        $('#modal-registration').on('shown.bs.modal', function () {
+            $('#name-field').focus();
+        });
+
+        $(".advantages-list a").on('click', function (event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+
+                var hash = this.hash;
+
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 48
+                }, 800, function () {
+                    window.location.hash = hash;
+                });
+            }
+        });
+
+        var myPlayer = videojs('video-item-01', {
+            controls: true,
+            poster: '',
+            techOrder: [
+                "youtube"
+            ],
+            sources: [
+                {
+                    type: 'video/youtube',
+                    src: 'https://youtu.be/nfyKKi3A0as'
+                }
+            ]
+        });
