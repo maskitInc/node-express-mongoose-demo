@@ -3,7 +3,7 @@
 	"name": "Velarm.net",
 	"description": "Digitory Legal gets lawyers and clients realistic legal budgets fast!",
 	"lang": "en-GB",
-	"start_url": "/main-01",
+	"start_url": "/",
 	"display": "standalone",
 	"theme_color": "#87c9eb",
 	"background_color": "#f8fafb",
