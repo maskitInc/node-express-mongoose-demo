@@ -36,7 +36,7 @@ module.exports = function (app) {
   }));
 
   app.use(cors({
-    origin: ['http://localhost:3000', 'https://velarm-landing-01.herokuapp.com'],
+    origin: ['http://localhost:3000', 'https://velarm.herokuapp.com'],
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     credentials: true
   }));
